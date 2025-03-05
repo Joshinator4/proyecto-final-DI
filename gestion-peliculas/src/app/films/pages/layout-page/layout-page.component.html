@@ -1,1 +1,41 @@
-<p>layout-page works!</p>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{width: '250px'}">
+    <mat-toolbar color="warn">
+      <span>Menú</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <!-- Definir enlace y acción de esconder el menú -->
+      <!-- <mat-list-item>
+        <mat-icon matListItemIcon>save</mat-icon>
+        Guardar
+      </mat-list-item> -->
+      <!--* Se genra *ngFor en el ancor (<a>) para que en cualquier lado en el que se haga click se dirija al URL (no solo en el texto)  -->
+      <a *ngFor="let item of sidebarItems" href="{{item.url}}" (click)="sidenav.toggle()">
+        <mat-list-item  matListItemTitle>
+        <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+          {{item.label}}
+        </mat-list-item>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+     <span class="spacer"></span> <!--Spacer es una clase definida en el style.css-->
+    <button mat-button>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="container p-2">
+    <router-outlet></router-outlet><!--Esto es para cargar los html de los hijos  -->
+  </div>
+
+</mat-sidenav-container>
