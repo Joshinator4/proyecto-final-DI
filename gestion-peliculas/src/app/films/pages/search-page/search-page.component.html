@@ -1,1 +1,10 @@
-<p>search-page works!</p>
+<div class="row p-3">
+  <div class="col-12">
+    <h2 style="text-align: center;">Search Films</h2>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <input matInput placeholder="Search films" (keyup.enter)="buscarPelicula()" #txtInputTitulo>
+    </mat-form-field> <!--keyup.enter cuando se levante el botón enter, tras pulsarlo se lanzará el método buscarEtiqueta, el cual recibe el texto insetado en el input, esto se hace mediante el #txtInputEtiqueta -->
+
+  </div>
+</div>

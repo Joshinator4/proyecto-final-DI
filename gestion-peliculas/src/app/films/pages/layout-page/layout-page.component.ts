@@ -9,9 +9,7 @@ import { Component } from '@angular/core';
 export class LayoutPageComponent {
   urlRaiz = 'films';
   public sidebarItems = [
-    {label: 'Listado', icon: 'label', url:`${this.urlRaiz}/list`},
-
-    {label: 'Añadir', icon: 'add', url:`${this.urlRaiz}/new-hero`},
-    {label: 'Buscar', icon: 'search', url:`${this.urlRaiz}/search`}
+    {label: 'Search', icon: 'search', url:`${this.urlRaiz}/search`},
+    {label: 'Favorites', icon: 'grade', url:`${this.urlRaiz}/favorites`},
   ]
 }

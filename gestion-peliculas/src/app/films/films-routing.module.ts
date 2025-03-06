@@ -14,7 +14,7 @@ const routes: Routes = [
       {path: 'search' , component: SearchPageComponent},
       {path: 'favorites' , component: FavoritesPageComponent},
       {path: ':id' , component: ShowPageComponent},//Ojo, la ruta con el :id debe estar al final del listado, ya que coincide con todas las rutas anteriores, y provocaría que nunca entráramos por ellas.
-      {path: '**', redirectTo: 'list'}//wildcard que nos mande a la lista. El wildcard se activará cuando la ruta esté vacía, es decir, al llamar al módulo heroes de inicio.
+      {path: '**', redirectTo: 'search'}//wildcard que nos mande a la lista. El wildcard se activará cuando la ruta esté vacía, es decir, al llamar al módulo heroes de inicio.
     ]
   },
 ];

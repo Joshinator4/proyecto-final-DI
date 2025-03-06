@@ -7,6 +7,8 @@ import { ShowPageComponent } from './pages/show-page/show-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.component';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -14,12 +16,14 @@ import { MaterialModule } from '../material/material.module';
     LayoutPageComponent,
     ShowPageComponent,
     SearchPageComponent,
-    FavoritesPageComponent
+    FavoritesPageComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    FilmsRoutingModule
+    FilmsRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class FilmsModule { }
