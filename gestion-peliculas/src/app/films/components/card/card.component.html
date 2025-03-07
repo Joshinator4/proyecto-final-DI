@@ -1,37 +1,30 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{film.title}}</mat-card-title>
-    <mat-card-subtitle>{{film.popularity}}</mat-card-subtitle>
+    <mat-card-title style="color: aqua;">{{film.title}}</mat-card-title>
+    <mat-card-subtitle>Popularity: <span style="color: yellow;">{{film.popularity}}</span></mat-card-subtitle>
   </mat-card-header>
 
 <!--TODO imagen  -->
-  <img mat-card-image src="{{FilmImage}}" alt="film.title">
+  <img mat-card-image src="{{FilmImage}}" alt="{{film.title}}" style="height: 400px;">
 
-  <!-- <mat-card-content class="mt-2">
-    <h4>{{hero.publisher}}</h4>
+   <mat-card-content class="mt-2">
+    <h4>Original lenguage <span style="color: chartreuse;">{{film.original_language.toUpperCase()}}</span></h4>
     <p>
-      <strong>Primera aparición</strong>{{hero.first_appearance}}
+      <strong>Overview: </strong>{{film.overview.slice(0, 150)}}...
     </p>
     <br>
     <mat-chip-listbox>
-      <mat-chip *ngFor="let character of hero.characters.split(',') | slice:0:3">{{character}}</mat-chip>
+      <mat-chip *ngFor="let genre of listaGeneros | slice:0:3"><span style="color: aquamarine;">{{genre.name}}</span></mat-chip>
     </mat-chip-listbox>
   </mat-card-content>
 
-  <mat-divider></mat-divider>
+  <mat-divider class="mt-1"></mat-divider>
   <mat-card-actions>
-    <button mat-button mat-raised color="primary" [routerLink]="['/heroes/edit', hero.id]">
-      <mat-icon>edit</mat-icon>
-      Editar
+    <button mat-button mat-raised color="warn" [routerLink]="['/films', film.id]">
+      <mat-icon>visibility</mat-icon>
+      Show details
     </button>
 
-  <span class="spacer"></span>
-
-  <button mat-button mat-raised color="primary" [routerLink]="['/heroes', hero.id]">
-    <mat-icon>more_horiz</mat-icon>
-    Más
-  </button>
-
-  </mat-card-actions>-->
+  </mat-card-actions>
 
 </mat-card>

@@ -6,5 +6,13 @@
       <input matInput placeholder="Search films" (keyup.enter)="buscarPelicula()" #txtInputTitulo>
     </mat-form-field> <!--keyup.enter cuando se levante el botón enter, tras pulsarlo se lanzará el método buscarEtiqueta, el cual recibe el texto insetado en el input, esto se hace mediante el #txtInputEtiqueta -->
 
+    <span class="spacer"></span>
+
+    <div class="grid mb-8">
+      <div *ngFor="let film of films" class="col-12 sm:col-6 md:col-6 xl:col-4">
+        <fimls-film-card [film]="film" [genreList]="genreList"></fimls-film-card>
+      </div>
+    </div>
+
   </div>
 </div>
