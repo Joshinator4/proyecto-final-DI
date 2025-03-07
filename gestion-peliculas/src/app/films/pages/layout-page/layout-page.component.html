@@ -9,11 +9,6 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <!-- Definir enlace y acción de esconder el menú -->
-      <!-- <mat-list-item>
-        <mat-icon matListItemIcon>save</mat-icon>
-        Guardar
-      </mat-list-item> -->
       <!--* Se genra *ngFor en el ancor (<a>) para que en cualquier lado en el que se haga click se dirija al URL (no solo en el texto)  -->
       <a *ngFor="let item of sidebarItems" href="{{item.url}}" (click)="sidenav.toggle()">
         <mat-list-item  matListItemTitle>

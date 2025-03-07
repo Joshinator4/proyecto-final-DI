@@ -1,1 +1,49 @@
-<p>show-page works!</p>
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner>
+
+      </mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="film; else divLoading" class="grid p-2">
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>{{film.title}}</mat-card-title>
+      <mat-card-subtitle>Poster film:</mat-card-subtitle>
+    </mat-card-header>
+    <img src="{{FilmImage}}" alt="hero.superhero" mat-card-image>
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>Information</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item><strong>Original title: </strong></mat-list-item>
+          <p>{{film.original_title}}</p>
+        <mat-list-item><strong>Overview: </strong> </mat-list-item>
+          <p>{{film.overview}}</p>
+        <mat-list-item><strong>Original lenguage:</strong></mat-list-item>
+          <p>{{film.original_language.toUpperCase()}}</p>
+        <mat-list-item><strong>Genres:</strong></mat-list-item>
+          <ul>
+            <li *ngFor="let genre of genreList">{{ genre.name }} </li>
+          </ul>
+        <mat-list-item><strong>Production Companys:</strong></mat-list-item>
+
+            <p *ngFor="let production_company of film.production_companies"><img src="{{ProductionImage(production_company.logo_path)}}" alt=""> <br>{{ production_company.name }} <br></p>
+
+
+      </mat-list>
+      <button mat-fab extended (click)="volverAlListado()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back to search page</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

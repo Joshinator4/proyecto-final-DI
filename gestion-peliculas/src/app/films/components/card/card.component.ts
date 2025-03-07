@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Result } from 'src/app/interfaces/film.interfaces';
+import { Film } from 'src/app/interfaces/film.interfaces';
 import { Genre } from 'src/app/interfaces/genres.interfaces';
+import { FilmsService } from '../../services/films.service';
 
 
 @Component({
@@ -9,20 +10,15 @@ import { Genre } from 'src/app/interfaces/genres.interfaces';
 })
 export class CardComponent {
 
-  @Input()public film!: Result;
+  @Input()public film!: Film;
 
-  @Input()public genreList!: Genre[];
+  public genreList!: Genre[];
 
-  public listaGeneros: Genre[]=[];
-
-  constructor(){}
+  constructor(private filmService: FilmsService){}
 
   ngOnInit(): void {
     if(!this.film) throw new Error('Film property is required');
-    console.log(this.film.genre_ids)
-    console.log(this.genreList)
-
-    this.listaGeneros = this.genreList.filter((element) => this.film.genre_ids.includes(element.id));
+    this.genreList = this.filmService.listaGeneros.filter((element) => this.film.genre_ids.includes(element.id));
   }
 
   get FilmImage(){
@@ -31,6 +27,4 @@ export class CardComponent {
     }
     return `https://image.tmdb.org/t/p/w1280/${this.film.backdrop_path}`
   }
-
-
 }

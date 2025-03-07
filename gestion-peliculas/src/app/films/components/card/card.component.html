@@ -4,7 +4,6 @@
     <mat-card-subtitle>Popularity: <span style="color: yellow;">{{film.popularity}}</span></mat-card-subtitle>
   </mat-card-header>
 
-<!--TODO imagen  -->
   <img mat-card-image src="{{FilmImage}}" alt="{{film.title}}" style="height: 400px;">
 
    <mat-card-content class="mt-2">
@@ -14,7 +13,7 @@
     </p>
     <br>
     <mat-chip-listbox>
-      <mat-chip *ngFor="let genre of listaGeneros | slice:0:3"><span style="color: aquamarine;">{{genre.name}}</span></mat-chip>
+       <mat-chip *ngFor="let genre of (genreList.length > 0 ? genreList.slice(0,3) : [{ name: 'Unkwnown genre', id: 0 }])"><span style="color: aquamarine;">{{genre.name}}</span></mat-chip>
     </mat-chip-listbox>
   </mat-card-content>
 

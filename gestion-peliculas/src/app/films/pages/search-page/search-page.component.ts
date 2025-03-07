@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
-import { Result } from 'src/app/interfaces/film.interfaces';
-import { Genre } from 'src/app/interfaces/genres.interfaces';
+import { Film,} from 'src/app/interfaces/film.interfaces';
 
 @Component({
   selector: 'app-search-page',
@@ -20,20 +19,17 @@ export class SearchPageComponent {
   }
 
   ngOnInit(): void {
-    this.filmsService.getGenreList(); // Se carga una sola vez
+    this.filmsService.getGenreList(); // Se realiza la búsqueda de los géneros para tenerlos ya cargados en el servicio y después poder mpostrar los géneros de cada film. Se carga en el ngOnInit para que asi se cargue una sola vez
   }
 
   buscarPelicula():void{
-    const etiqueta = this.inputEtiqueta.nativeElement.value;
+    const etiqueta = this.inputEtiqueta.nativeElement.value.trim();
     this.filmsService.buscarPelicula(etiqueta);
-    this.inputEtiqueta.nativeElement.value = "";
+    this.inputEtiqueta.nativeElement.value = "";// se deja vacía el imput tras la búsqueda
   }
 
-  get films(): Result[]{
+  get films(): Film[]{
     return this.filmsService.listaPeliculas;
   }
 
-  get genreList(): Genre[]{
-    return this.filmsService.listaGeneros;
-  }
 }
