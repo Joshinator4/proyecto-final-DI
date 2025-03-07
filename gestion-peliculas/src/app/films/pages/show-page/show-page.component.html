@@ -35,9 +35,11 @@
             <li *ngFor="let genre of genreList">{{ genre.name }} </li>
           </ul>
         <mat-list-item><strong>Production Companys:</strong></mat-list-item>
-
-            <p *ngFor="let production_company of film.production_companies"><img src="{{ProductionImage(production_company.logo_path)}}" alt=""> <br>{{ production_company.name }} <br></p>
-
+            <p *ngFor="let production_company of film.production_companies"><img src="{{ProductionImage(production_company.logo_path)}}" alt="" style="height: 100px;"> <br>{{ production_company.name }} <br></p>
+        <mat-list-item><strong>Production countrys:</strong></mat-list-item>
+          <ul>
+            <li *ngFor="let countries of film.production_countries">{{ countries.name }} </li>
+          </ul>
 
       </mat-list>
       <button mat-fab extended (click)="volverAlListado()">

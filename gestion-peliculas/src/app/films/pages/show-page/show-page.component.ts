@@ -34,16 +34,17 @@ export class ShowPageComponent {
     ).subscribe(film => {
       if(!film) return this.router.navigate(['/films/search']);
       this.film = film;
-      return;
-    })
-    this.filmService.searchGenreList()
+      this.filmService.searchGenreList()
       .subscribe(
         resp =>{
           console.log(resp.genres),
-          console.log(this.film.genres)
+          console.log(this.film.genres),
           this.genreList = resp.genres.filter((element) => this.film.genres.map(genre => genre.id).includes(element.id)) //como genres es un array de genre, se hace un mapeo para quedarnos solo con el id, y luego usar el includes con el id
         }
       )
+      return;
+    })
+
 
   }
 
