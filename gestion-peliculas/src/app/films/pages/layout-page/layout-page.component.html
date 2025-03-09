@@ -16,6 +16,12 @@
           {{item.label}}
         </mat-list-item>
       </a>
+      <a *ngIf="idRol == 1" href="users/list-user" (click)="sidenav.toggle()">
+        <mat-list-item  matListItemTitle>
+        <mat-icon matListItemIcon>person</mat-icon>
+          User Panel
+        </mat-list-item>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -24,7 +30,7 @@
       <mat-icon>menu</mat-icon>
     </button>
      <span class="spacer"></span> <!--Spacer es una clase definida en el style.css-->
-    <button mat-button>
+    <button mat-button (click)="onLogout()">
       Logout
     </button>
   </mat-toolbar>

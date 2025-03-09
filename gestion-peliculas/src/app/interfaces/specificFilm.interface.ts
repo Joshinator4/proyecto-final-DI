@@ -1,6 +1,6 @@
 import { Genre } from "./genres.interfaces";
 
-export interface ConcreteFilm {
+export interface SpecificFilm {
   adult:                 boolean;
   backdrop_path:         string;
   belongs_to_collection: null;

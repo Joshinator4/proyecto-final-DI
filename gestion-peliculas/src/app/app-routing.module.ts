@@ -1,10 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActivateGuard, canMatchGuard } from './guards/auth.guard';
+import { canActivateGuardPublic, canMatchGuardPublic } from './guards/public.guard';
+import { canActivateGuardUser } from './guards/users.guard';
+//import { canActivateGuardPublic, canMatchGuardPublic } from './guards/public.guard';
+
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: () => import('./home/home.module').then(m=>m.HomeModule),//esto añade el módulo por carga perezosa(LazyLoad)
+    canMatch: [canMatchGuardPublic],
+    canActivate: [canActivateGuardPublic]
+  },
+  {
     path: 'films',
-    loadChildren: () => import('./films/films.module').then(m=>m.FilmsModule)//esto añade el módulo por carga perezosa(LazyLoad)
+    loadChildren: () => import('./films/films.module').then(m=>m.FilmsModule),//esto añade el módulo por carga perezosa(LazyLoad)
+    canActivate: [canActivateGuard],
+    canMatch: [canMatchGuard]
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(m=>m.UsersModule),//esto añade el módulo por carga perezosa(LazyLoad)
+    canActivate: [canActivateGuard, canActivateGuardUser],
+    canMatch: [canMatchGuard, canActivateGuardUser]
   },
   /*{
     path: '404',
@@ -12,7 +31,7 @@ const routes: Routes = [
   },*/
   {
     path: '',
-    redirectTo: 'films',
+    redirectTo: 'login',
     pathMatch: 'full' //significa que la URL debe coincidir exactamente con la ruta especificada. Si hay una coincidencia parcial, la ruta no se activará.
   },
   /*{

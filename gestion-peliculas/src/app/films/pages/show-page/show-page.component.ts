@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Film } from 'src/app/interfaces/film.interfaces';
 import { FilmsService } from '../../services/films.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { switchMap} from 'rxjs/operators';
 import { Genre } from 'src/app/interfaces/genres.interfaces';
-import { ConcreteFilm } from 'src/app/interfaces/concreteFilm.interface';
+import { SpecificFilm } from 'src/app/interfaces/specificFilm.interface';
 
 @Component({
   selector: 'app-show-page',
@@ -12,10 +12,11 @@ import { ConcreteFilm } from 'src/app/interfaces/concreteFilm.interface';
   styles: [
   ]
 })
-export class ShowPageComponent {
+export class ShowPageComponent implements OnInit{
 
-  public film!: ConcreteFilm;
+  public film!: SpecificFilm;
   public genreList!: Genre[];
+
   constructor(
     private filmService: FilmsService,
     private activatedRoute: ActivatedRoute,

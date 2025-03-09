@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la pantalla */
+  width: 100vw;
+}
+
+/* Hacer que el fondo ocupe toda la pantalla */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Ocupa toda la pantalla */
+  background: linear-gradient(135deg, #1e1e1e  , #1e1e1e  );
+}
+
+/* Estilo de la tarjeta de login */
+.login-card {
+  width: 100%;
+  max-width: 400px; /* Ajusta el ancho máximo */
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: 252525 ;
+}
+
+/* Asegurar que los inputs ocupen todo el ancho */
+.full-width {
+  width: 100%;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%;
+  height: 100px; /* Ajusta según necesidad */
+}

@@ -1,0 +1,121 @@
+<router-outlet></router-outlet>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+
+  <div class="col-12">
+    <mat-card>
+      <mat-card-content>
+      <mat-card-title>Add User</mat-card-title>
+        <form id="userForm" class="grid" [formGroup]="usuarioForm" (ngSubmit)="confirmAdd()">
+
+          <mat-form-field class="col-12">
+            <mat-label>User (email)</mat-label>
+            <input
+            type="email"
+            matInput
+            required
+            formControlName="usuario"
+            >
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Password</mat-label>
+            <input
+            type="password"
+            matInput
+            required
+            formControlName="password"
+            >
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Rol</mat-label>
+            <mat-select
+              required
+              formControlName="id_rol"
+              >
+              <mat-option *ngFor="let rol of roles" value="{{ rol.id_rol }}">
+                {{ rol.rol }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Public Name</mat-label>
+            <input
+            type="text"
+            matInput
+            required
+            formControlName="nombre_publico"
+            >
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Observations</mat-label>
+            <input
+            type="text"
+            matInput
+            formControlName="observaciones"
+            >
+          </mat-form-field>
+
+        </form>
+        <div class="flex justify-content-between">
+          <button *ngIf="usuarioForm.valid" mat-flat-button color="primary" type="submit" form="userForm">Save</button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <h3 mat-dialog-title>Add User</h3>
+
+  <form class="mat-dialog-content" [formGroup]="usuarioForm">
+
+      <div class="form">
+          <mat-form-field color="accent">
+              <input matInput placeholder="Correo electrónico" formControlName="usuario" name="usuario" required>
+          </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field color="accent">
+              <input matInput placeholder="Nombre Público" formControlName="nombre_publico" name="nombre_publico">
+          </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field color="accent">
+              <input matInput type="password" placeholder="Contraseña" formControlName="password" name="password" required>
+          </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field>
+              <mat-label>Rol</mat-label>
+              <mat-select formControlName="id_rol">
+                  <mat-option *ngFor="let rol of roles" [value]="rol.id_rol">
+                      {{rol.rol}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field color="accent">
+              <textarea matInput placeholder="Observaciones" formControlName="observaciones"
+                  name="observaciones"></textarea>
+          </mat-form-field>
+      </div>
+
+      <div mat-dialog-actions>
+          <button id="onSubmit" mat-button type="submit"  [disabled]="!usuarioForm.valid" (click)="confirmAdd()">Guardar</button>
+          <button id="onNoClick" mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+      </div>
+
+  </form>
+</div> -->

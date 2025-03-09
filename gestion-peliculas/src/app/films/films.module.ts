@@ -8,7 +8,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CardComponent } from './components/card/card.component';
+import { CardComponent } from './pages/components/card/card.component';
 
 
 @NgModule({

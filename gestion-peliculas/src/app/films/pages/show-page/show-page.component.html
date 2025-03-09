@@ -25,27 +25,36 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item><strong>Original title: </strong></mat-list-item>
-          <p>{{film.original_title}}</p>
+          <p class="pl-4">{{film.original_title}}</p>
+        <mat-list-item *ngIf="film.homepage"><strong>Film Link: </strong></mat-list-item>
+          <a class="pl-4" *ngIf="film.homepage" href="{{film.homepage}}" style="color: aquamarine;">{{film.homepage}}</a>
         <mat-list-item><strong>Overview: </strong> </mat-list-item>
-          <p>{{film.overview}}</p>
+          <p class="pl-4">{{film.overview}}</p>
         <mat-list-item><strong>Original lenguage:</strong></mat-list-item>
-          <p>{{film.original_language.toUpperCase()}}</p>
+          <p class="pl-4">{{film.original_language.toUpperCase()}}</p>
         <mat-list-item><strong>Genres:</strong></mat-list-item>
-          <ul>
-            <li *ngFor="let genre of genreList">{{ genre.name }} </li>
-          </ul>
+          <p class="pl-4" *ngFor="let genre of genreList">{{ genre.name }} </p>
         <mat-list-item><strong>Production Companys:</strong></mat-list-item>
-            <p *ngFor="let production_company of film.production_companies"><img src="{{ProductionImage(production_company.logo_path)}}" alt="" style="height: 100px;"> <br>{{ production_company.name }} <br></p>
+          <p class="pl-4" *ngFor="let production_company of film.production_companies"><img src="{{ProductionImage(production_company.logo_path)}}" alt="" style="height: 100px;"> <br>{{ production_company.name }} <br></p>
         <mat-list-item><strong>Production countrys:</strong></mat-list-item>
-          <ul>
-            <li *ngFor="let countries of film.production_countries">{{ countries.name }} </li>
-          </ul>
+          <p class="pl-4" *ngFor="let countries of film.production_countries">{{ countries.name }} </p>
+
 
       </mat-list>
-      <button mat-fab extended (click)="volverAlListado()">
-        <mat-icon>arrow_back</mat-icon>
-        <span>Back to search page</span>
-      </button>
+      <div class="flex justify-content-between">
+        <button mat-fab extended (click)="volverAlListado()" color="primary">
+          <mat-icon>arrow_back</mat-icon>
+          <span>Back to search page</span>
+        </button>
+        <button mat-fab extended (click)="volverAlListado()" color="accent">
+          <mat-icon>favorite</mat-icon>
+          <span>Add to Favorites</span>
+        </button>
+        <button *ngIf="false" mat-fab extended (click)="volverAlListado()" color="warn">
+          <mat-icon>favorite</mat-icon>
+          <span>Add to Favorites</span>
+        </button>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

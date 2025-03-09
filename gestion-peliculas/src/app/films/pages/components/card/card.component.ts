@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Film } from 'src/app/interfaces/film.interfaces';
 import { Genre } from 'src/app/interfaces/genres.interfaces';
-import { FilmsService } from '../../services/films.service';
+import { FilmsService } from '../../../services/films.service';
 
 
 @Component({
   selector: 'fimls-film-card',
   templateUrl: './card.component.html',
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
 
   @Input()public film!: Film;
 

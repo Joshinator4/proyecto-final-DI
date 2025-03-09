@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
-import { ConcreteFilm } from 'src/app/interfaces/concreteFilm.interface';
+import { catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { SpecificFilm } from 'src/app/interfaces/specificFilm.interface';
 import { Film, SearchResponse } from 'src/app/interfaces/film.interfaces';
 import { Genre, Genres } from 'src/app/interfaces/genres.interfaces';
 
@@ -34,12 +35,12 @@ export class FilmsService {
         this.listaPeliculas = resp.results
       })
   }
-  buscarPeliculaPorID(id:number): Observable<ConcreteFilm | undefined> {
+  buscarPeliculaPorID(id:number): Observable<SpecificFilm | undefined> {
     const params = new HttpParams()
                     .set('language', 'en-US')
                     .set('api_key', this.apiKey);
 
-    return this.httpClient.get<ConcreteFilm>(`${ this.serviceUrl }/movie/${id}`, { params }).pipe(catchError(error => of(undefined)))
+    return this.httpClient.get<SpecificFilm>(`${ this.serviceUrl }/movie/${id}`, { params }).pipe(catchError(error => of(undefined)))
   }
 
   getGenreList(){

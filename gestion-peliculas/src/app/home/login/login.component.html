@@ -1,0 +1,63 @@
+<!-- <form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="login-container">
+    <mat-card class="login-card">
+      <mat-card-content>
+        Step 1: Email Input
+        <div *ngIf="!showPasswordField">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" required>
+            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">Enter a valid email</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="verifyEmail()">Next</button>
+        </div>
+
+         Step 2: Password Input
+        <div *ngIf="showPasswordField">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" required>
+          </mat-form-field>
+          <button mat-raised-button color="accent" (click)="login()">Login</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</form> -->
+
+<div class="login-wrapper">
+  <mat-card class="login-card col-12">
+    <mat-card-title style="color: antiquewhite;">Login</mat-card-title>
+    <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tmdb.new.logo.svg/2560px-Tmdb.new.logo.svg.png" alt="TheMovieDB-logo" class="mb-3 mt-3 ">
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <!-- Step 1: Email Input -->
+        <div *ngIf="!showPasswordField">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="username" required>
+            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              Enter a valid email
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" *ngIf="!isLoading" (click)="verifyEmail()" class="full-width">Next</button>
+          <div class="spinner-wrapper" *ngIf="isLoading">
+            <mat-spinner diameter="80"></mat-spinner>
+          </div>
+        </div>
+
+        <!-- Step 2: Password Input -->
+        <div *ngIf="showPasswordField">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" required>
+          </mat-form-field>
+          <button mat-raised-button color="accent" (click)="login()" class="full-width">Login</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
