@@ -29,7 +29,7 @@ export class FilmsService {
     this.httpClient.get<SearchResponse>(`${ this.serviceUrl }/search/movie`, { params })
       .subscribe( resp => {
         this.listaPeliculas = resp.results
-      })
+      });
   }
   buscarPeliculaPorID(id:number): Observable<SpecificFilm | undefined> {
     const params = new HttpParams()
@@ -56,6 +56,13 @@ export class FilmsService {
                     .set('language', 'en-US')
                     .set('api_key', this.apiKey);
     return this.httpClient.get<Genres>(`${ this.serviceUrl }/genre/movie/list`, { params })
+  }
+
+  getFilmImage(backdrop_path: string){
+    if(backdrop_path == null){
+      return 'https://www.ucm.es/icae/file/no-image-available/?ver'
+    }
+    return `https://image.tmdb.org/t/p/w1280/${backdrop_path}`
   }
 
 }

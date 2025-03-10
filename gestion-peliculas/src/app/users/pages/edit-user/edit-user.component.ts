@@ -17,17 +17,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ]
 })
 export class EditUserComponent implements OnInit{
+  public edit: boolean = false;
   public user?: Usuario;
   public rolList!: Rol[];
   public userForm:FormGroup = new FormGroup({
-    id_usuario: new FormControl('', [Validators.required]),
+    id_usuario: new FormControl(null),
     usuario: new FormControl('', [Validators.required, Validators.email]),
-    nombre_publico: new FormControl(''),
-    password: new FormControl(''),
-    habilitado: new FormControl(null, [Validators.required]),
-    id_rol: new FormControl('', [Validators.required]),
+    nombre_publico: new FormControl('', [Validators.required]),
+    password: new FormControl(null),
+    habilitado: new FormControl(null),
+    id_rol: new FormControl(''),
     observaciones: new FormControl(''),
-    rol: new FormControl('', [Validators.required])
+    rol: new FormControl('')
   });
 
 
@@ -48,15 +49,18 @@ export class EditUserComponent implements OnInit{
 
     async ngOnInit() {
       try {
-
         // Obtenemos el ID de la URL
         const id = this.activatedRoute.snapshot.params['id'];
         if (id) {
           await this.getRoles();
           this.getUsuarios();
-          this.user = this.userService.usuarios.find(u => u.id_usuario == id);;
-          this.userForm.reset(this.user)
-          console.log(this.user)
+          this.user = this.userService.usuarios.find(u => u.id_usuario == id);
+          if(this.user){
+            this.userForm.reset(this.user);
+            this.edit = true;
+          }
+        }else{
+          await this.getRoles();
         }
       } catch (error) {
         console.error('Error al obtener el usuario:', error);
@@ -65,7 +69,6 @@ export class EditUserComponent implements OnInit{
 
     get currentUser(){
       const user = this.userForm.value as Usuario;
-      console.log(this.userForm)
       return user;
     }
 
@@ -83,28 +86,53 @@ export class EditUserComponent implements OnInit{
       }
     }
 
-    async confirmEdit() {
+    async addUser(){
       if (this.userForm.valid) {
         const usuario = this.userForm.value;
-
-        const RESP = await this.userService.editUsuario(usuario).toPromise();
+        const RESP = await this.userService.addUsuario(usuario).toPromise();
+        console.log(RESP)
         if (RESP.ok) {
-          this.snackBar.open("User edited correctly", CLOSE, { duration: 5000 });
+          this.snackBar.open("User created correctly", CLOSE, { duration: 5000 });
           this.router.navigate(['users/list-user'])
         } else {
-          this.snackBar.open("Cant edit user", CLOSE, { duration: 5000 });
+          this.snackBar.open("Cant create user", CLOSE, { duration: 5000 });
         }
       } else {
         this.snackBar.open(INVALID_FORM, CLOSE, { duration: 5000 });
       }
     }
 
-    async deleteUser(usuario: Usuario) {
-      const RESP = await this.userService.deleteUsuario(usuario).toPromise();
+    async confirmEdit() {
+      if (this.userForm.valid) {
+        const usuario = this.userForm.value;
+        console.log(usuario)
+        const RESP = await this.userService.editUsuario(usuario).toPromise();
+        if (RESP.ok) {
+          this.snackBar.open("User saved correctly", CLOSE, { duration: 5000 });
+          this.router.navigate(['users/list-user'])
+        } else {
+          this.snackBar.open("Cant saved correctly", CLOSE, { duration: 5000 });
+        }
+      } else {
+        this.snackBar.open(INVALID_FORM, CLOSE, { duration: 5000 });
+      }
+    }
+
+    destroyUser(){
+      console.log("asfasfasdf")
+      this.deleteUser()
+    }
+
+    async deleteUser() {
+      console.log(1)
+      const RESP = await this.userService.deleteUsuario(this.user!).toPromise();
+
       if (RESP.ok) {
+        this.router.navigate(['users/list-user'])
         this.snackBar.open("User deleted", CLOSE, { duration: 5000 });
       } else {
-        this.snackBar.open("Cat delete this user", CLOSE, { duration: 5000 });
+        console.log("esntra")
+        this.snackBar.open("Cant delete this user", CLOSE, { duration: 5000 });
       }
     }
 

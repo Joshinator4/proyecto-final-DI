@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap} from 'rxjs/operators';
 import { Genre } from 'src/app/interfaces/genres.interfaces';
 import { SpecificFilm } from 'src/app/interfaces/specificFilm.interface';
+import { FavoritesService } from '../../services/favorites.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CLOSE, ERROR } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-show-page',
@@ -19,6 +22,8 @@ export class ShowPageComponent implements OnInit{
 
   constructor(
     private filmService: FilmsService,
+    private snackBar: MatSnackBar,
+    private favoriteService: FavoritesService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ){
@@ -70,5 +75,22 @@ export class ShowPageComponent implements OnInit{
     }
     return `https://image.tmdb.org/t/p/w200${logo_path}`
   }
+
+  addFavoriteFilm(){
+    this.addFavorite();
+  }
+
+  async addFavorite(){
+    let token = localStorage.getItem('token');
+    if(token){
+      const RESPONSE = await this.favoriteService.addFavorite(this.film.id, token).toPromise();
+      if (RESPONSE.ok) {
+        this.snackBar.open("Favorite added successfully", CLOSE, { duration: 5000 });
+      } else {
+         this.snackBar.open(ERROR, CLOSE, { duration: 5000 });
+      }
+    }
+  }
+
 
 }

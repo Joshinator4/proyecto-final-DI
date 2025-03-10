@@ -62,11 +62,11 @@
             formControlName="observaciones"
             >
           </mat-form-field>
-
         </form>
         <div class="flex justify-content-between">
-          <button *ngIf="userForm.valid" mat-flat-button color="primary" type="submit" form="userForm">Save Edit</button>
-          <button mat-flat-button color="warn" form="userForm" (onclick)="deleteUser(this.user!)">Delete User</button>
+          <button *ngIf="edit && userForm.valid" mat-flat-button color="primary" type="submit" form="userForm">Save edit</button>
+          <button *ngIf="!edit && userForm.valid" mat-flat-button color="primary" (click)="addUser()">Create user</button>
+          <button *ngIf="user" mat-flat-button color="warn" (click)="destroyUser()">Delete User</button>
         </div>
 
       </mat-card-content>

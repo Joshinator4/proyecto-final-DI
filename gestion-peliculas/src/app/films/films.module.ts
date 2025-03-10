@@ -9,6 +9,7 @@ import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.co
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './pages/components/card/card.component';
+import { FavoriteCardComponent } from './pages/components/favorite-card/favorite-card.component';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { CardComponent } from './pages/components/card/card.component';
     ShowPageComponent,
     SearchPageComponent,
     FavoritesPageComponent,
-    CardComponent
+    CardComponent,
+    FavoriteCardComponent,
+    FavoriteCardComponent
   ],
   imports: [
     CommonModule,
