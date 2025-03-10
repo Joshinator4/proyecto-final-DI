@@ -24,10 +24,8 @@ export class ListUserComponent implements OnInit{
   async getUsuarios() {
     const RESPONSE = await this.servicioUsuarios.getAllUsuarios().toPromise();
     if (RESPONSE.ok) {
-      console.log(RESPONSE.data)
       this.users = RESPONSE.data
       this.servicioUsuarios.usuarios = RESPONSE.data
-      console.log(this.servicioUsuarios.usuarios)
     }
   }
 

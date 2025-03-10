@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Rol } from 'src/app/interfaces/rol';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsersService } from '../../services/users.service';
@@ -16,10 +16,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styles: [
   ]
 })
-export class EditUserComponent {
-  public user!: Usuario;
+export class EditUserComponent implements OnInit{
+  public user?: Usuario;
   public rolList!: Rol[];
-  public userForm:FormGroup = new FormGroup([]);
+  public userForm:FormGroup = new FormGroup({
+    id_usuario: new FormControl('', [Validators.required]),
+    usuario: new FormControl('', [Validators.required, Validators.email]),
+    nombre_publico: new FormControl(''),
+    password: new FormControl(''),
+    habilitado: new FormControl(null, [Validators.required]),
+    id_rol: new FormControl('', [Validators.required]),
+    observaciones: new FormControl(''),
+    rol: new FormControl('', [Validators.required])
+  });
 
 
 
@@ -39,11 +48,14 @@ export class EditUserComponent {
 
     async ngOnInit() {
       try {
+
         // Obtenemos el ID de la URL
         const id = this.activatedRoute.snapshot.params['id'];
         if (id) {
+          await this.getRoles();
           this.getUsuarios();
-          this.user = this.userService.usuarios[id];
+          this.user = this.userService.usuarios.find(u => u.id_usuario == id);;
+          this.userForm.reset(this.user)
           console.log(this.user)
         }
       } catch (error) {
@@ -51,29 +63,16 @@ export class EditUserComponent {
       }
     }
 
+    get currentUser(){
+      const user = this.userForm.value as Usuario;
+      console.log(this.userForm)
+      return user;
+    }
+
     async getUsuarios() {
       const RESPONSE = await this.userService.getAllUsuarios().toPromise();
       if (RESPONSE.ok) {
         this.userService.usuarios = RESPONSE.data
-      }
-    }
-
-    async getUsuarioById(id: number, route?: string) {
-      const RESPONSE = await this.userService.getUsuarioByID(id).toPromise();
-      if (RESPONSE.ok) {
-        console.log(RESPONSE.data)
-        this.user = RESPONSE.data
-        console.log(this.user)
-        this.userForm = new FormGroup({
-          id_usuario: new FormControl(this.user.id_usuario, [Validators.required]),
-          usuario: new FormControl(this.user.usuario, [Validators.required, Validators.email]),
-          nombre_publico: new FormControl(this.user.nombre_publico),
-          password: new FormControl(''),
-          habilitado: new FormControl(Number(this.user.habilitado) === 1, [Validators.required]),
-          id_rol: new FormControl(this.user.id_rol, [Validators.required]),
-          observaciones: new FormControl(this.user.observaciones),
-          rol: new FormControl(this.user.rol, [Validators.required])
-        });
       }
     }
 
@@ -91,6 +90,7 @@ export class EditUserComponent {
         const RESP = await this.userService.editUsuario(usuario).toPromise();
         if (RESP.ok) {
           this.snackBar.open("User edited correctly", CLOSE, { duration: 5000 });
+          this.router.navigate(['users/list-user'])
         } else {
           this.snackBar.open("Cant edit user", CLOSE, { duration: 5000 });
         }

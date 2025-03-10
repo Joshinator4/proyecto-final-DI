@@ -19,10 +19,6 @@ export class FilmsService {
   constructor(private httpClient: HttpClient) { }
 
   buscarPelicula(titulo:string){
-    if(titulo == ""){
-      window.alert("No se admiten busquedas vacías");
-      return;
-    }
     const params = new HttpParams() //!Con esto podemos generar los parametros de un http. generará algo asi como ?api_key=75619e68d51d07c77caa2da60519d5dd&limit=10&q=(lo que entre por etiqueta)
                     .set('query', titulo)
                     .set('language', 'en-US')

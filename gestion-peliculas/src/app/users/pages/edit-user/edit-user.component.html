@@ -1,5 +1,7 @@
-<router-outlet></router-outlet>
-
+<h1>
+  {{ currentUser.id_usuario ? 'Edit' : 'Add'}} user
+  <small *ngIf="currentUser.id_usuario">{{currentUser.usuario}}</small>
+</h1>
 <mat-divider class="mb-2"></mat-divider>
 
 <div class="grid">
@@ -25,7 +27,6 @@
             <input
             type="password"
             matInput
-            required
             formControlName="password"
             >
           </mat-form-field>
@@ -35,6 +36,7 @@
             <mat-select
               required
               formControlName="id_rol"
+              matInput
               >
               <mat-option *ngFor="let rol of rolList" value="{{ rol.id_rol }}">
                 {{ rol.rol }}
@@ -64,7 +66,7 @@
         </form>
         <div class="flex justify-content-between">
           <button *ngIf="userForm.valid" mat-flat-button color="primary" type="submit" form="userForm">Save Edit</button>
-          <button mat-flat-button color="warn" form="userForm" (onclick)="deleteUser(this.user)">Delete User</button>
+          <button mat-flat-button color="warn" form="userForm" (onclick)="deleteUser(this.user!)">Delete User</button>
         </div>
 
       </mat-card-content>

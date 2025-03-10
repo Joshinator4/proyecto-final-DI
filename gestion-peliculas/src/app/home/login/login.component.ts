@@ -67,6 +67,7 @@ export class LoginComponent {
           // console.log('ya he puesto el token');
           localStorage.setItem('token', RESPONSE.data.token);
           localStorage.setItem('usuario', RESPONSE.data.usuario);
+          localStorage.setItem('id_usuario', RESPONSE.data.id_usuario);
           localStorage.setItem('nombre_publico', RESPONSE.data.nombre_publico);
           localStorage.setItem('id_rol', RESPONSE.data.id_rol);
           this.commonService.headers = new HttpHeaders({
@@ -78,7 +79,7 @@ export class LoginComponent {
         } else if (RESPONSE.data.valido === 0) {
           this.snackBar.open('Disabled user', 'Close', {duration: 5000});
         } else if (RESPONSE.data.valido === 1) {
-          this.router.navigate(['/'])
+          this.showPasswordField = false;
           this.snackBar.open('User or password are invalids', 'Close', {duration: 5000});
         }
       }

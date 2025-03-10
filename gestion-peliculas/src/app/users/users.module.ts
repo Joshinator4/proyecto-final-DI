@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { NewUserComponent } from './pages/new-user/new-user.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 
 import { ListUserComponent } from './pages/list-user/list-user.component';
@@ -14,7 +13,6 @@ import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
-    NewUserComponent,
     EditUserComponent,
     ListUserComponent,
     CardComponent

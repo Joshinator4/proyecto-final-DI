@@ -14,6 +14,7 @@ export class SearchPageComponent {
   public inputEtiqueta!: ElementRef<HTMLInputElement>; //esto recibe el elemento que hay en el input del html
   //si no se pone la exclamación da error. la exclamación indica a angular que va a tener un valor si o si, por eso no hay que inicializarla
 
+  public inicio = true;
   constructor(private filmsService: FilmsService){
 
   }
@@ -24,8 +25,17 @@ export class SearchPageComponent {
 
   buscarPelicula():void{
     const etiqueta = this.inputEtiqueta.nativeElement.value.trim();
+    if(etiqueta == ""){
+          window.alert("No se admiten busquedas vacías");
+          return;
+        }
     this.filmsService.buscarPelicula(etiqueta);
+
     this.inputEtiqueta.nativeElement.value = "";// se deja vacía el imput tras la búsqueda
+    setTimeout(() => {
+      this.inicio = false;
+    },500);
+
   }
 
   get films(): Film[]{
