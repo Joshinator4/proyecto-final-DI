@@ -8,7 +8,7 @@
     "comentario": "se debe instalar del-cli con: npm install --global del-cli   y  copyfiles con npm install copyfiles -g .  Para instalar angular material ejecutar ng add @angular/material, seleccionar yes, indigo/pink, yes,  include and enable animations",
     "build:href": "ng build --base-href ./",
     "delete:docs": "del docs",
-    "copy:dist": "copyfiles dist/03-gifs-app/browser/* ./docs -f",
+    "copy:dist": "copyfiles dist/gestion-peliculas/* ./docs -f",
     "build:git": "npm run build:href && npm run delete:docs && npm run copy:dist",
     "subida:git": "npm run build:git && git add . && git commit -m \"Subiendo cambio en docs\" && git push",
     "watch": "ng build --watch --configuration development",
