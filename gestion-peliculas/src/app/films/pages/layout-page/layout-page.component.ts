@@ -9,6 +9,7 @@ import { AuthService } from 'src/services/auth.service';
   ]
 })
 export class LayoutPageComponent {
+  userName: string = localStorage.getItem('usuario')!;
   urlRaiz = 'films';
   idRol:number = Number(localStorage.getItem('id_rol'));
   public sidebarItems = [

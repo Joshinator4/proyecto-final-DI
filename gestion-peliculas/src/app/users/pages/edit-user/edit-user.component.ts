@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit{
 
 
     constructor(
-      private userService: UsersService,
+      private usersService: UsersService,
       private rolService: RolesService,
       private activatedRoute: ActivatedRoute,
       private router: Router,
@@ -54,7 +54,7 @@ export class EditUserComponent implements OnInit{
         if (id) {
           await this.getRoles();
           this.getUsuarios();
-          this.user = this.userService.usuarios.find(u => u.id_usuario == id);
+          this.user = this.usersService.usuarios.find(u => u.id_usuario == id);
           if(this.user){
             this.userForm.reset(this.user);
             this.edit = true;
@@ -73,9 +73,9 @@ export class EditUserComponent implements OnInit{
     }
 
     async getUsuarios() {
-      const RESPONSE = await this.userService.getAllUsuarios().toPromise();
+      const RESPONSE = await this.usersService.getAllUsuarios().toPromise();
       if (RESPONSE.ok) {
-        this.userService.usuarios = RESPONSE.data
+        this.usersService.usuarios = RESPONSE.data
       }
     }
 
@@ -89,7 +89,7 @@ export class EditUserComponent implements OnInit{
     async addUser(){
       if (this.userForm.valid) {
         const usuario = this.userForm.value;
-        const RESP = await this.userService.addUsuario(usuario).toPromise();
+        const RESP = await this.usersService.addUsuario(usuario).toPromise();
         console.log(RESP)
         if (RESP.ok) {
           this.snackBar.open("User created correctly", CLOSE, { duration: 5000 });
@@ -106,7 +106,7 @@ export class EditUserComponent implements OnInit{
       if (this.userForm.valid) {
         const usuario = this.userForm.value;
         console.log(usuario)
-        const RESP = await this.userService.editUsuario(usuario).toPromise();
+        const RESP = await this.usersService.editUsuario(usuario).toPromise();
         if (RESP.ok) {
           this.snackBar.open("User saved correctly", CLOSE, { duration: 5000 });
           this.router.navigate(['users/list-user'])
@@ -119,19 +119,16 @@ export class EditUserComponent implements OnInit{
     }
 
     destroyUser(){
-      console.log("asfasfasdf")
       this.deleteUser()
     }
 
     async deleteUser() {
-      console.log(1)
-      const RESP = await this.userService.deleteUsuario(this.user!).toPromise();
+      const RESP = await this.usersService.deleteUsuario(this.user!).toPromise();
 
       if (RESP.ok) {
-        this.router.navigate(['users/list-user'])
+        this.router.navigate(['/users/list-user'])
         this.snackBar.open("User deleted", CLOSE, { duration: 5000 });
       } else {
-        console.log("esntra")
         this.snackBar.open("Cant delete this user", CLOSE, { duration: 5000 });
       }
     }

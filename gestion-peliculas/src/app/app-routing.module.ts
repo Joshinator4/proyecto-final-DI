@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { canActivateGuard, canMatchGuard } from './guards/auth.guard';
 import { canActivateGuardPublic, canMatchGuardPublic } from './guards/public.guard';
 import { canActivateGuardUser } from './guards/users.guard';
+import { Error404PageComponent } from './shared/error404-page/pages/error404-page/error404-page.component';
 //import { canActivateGuardPublic, canMatchGuardPublic } from './guards/public.guard';
 
 
@@ -25,19 +26,19 @@ const routes: Routes = [
     canActivate: [canActivateGuard, canActivateGuardUser],
     canMatch: [canMatchGuard, canActivateGuardUser]
   },
-  /*{
+  {
     path: '404',
-    component: Error404PageComponent
-  },*/
+    loadChildren: () => import('./shared/error404-page/error404-page.module').then(m=>m.Error404PageModule),//esto añade el módulo por carga perezosa(LazyLoad)
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full' //significa que la URL debe coincidir exactamente con la ruta especificada. Si hay una coincidencia parcial, la ruta no se activará.
   },
-  /*{
+  {
     path: '**',
-    redirectTo: '404'// (**) por si se introduce una ruta errónea, que redirija a 404
-  }*/
+    redirectTo: '404/error404'// (**) por si se introduce una ruta errónea, que redirija a 404
+  }
 ];
 
 @NgModule({

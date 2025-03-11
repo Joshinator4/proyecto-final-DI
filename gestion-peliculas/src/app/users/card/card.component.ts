@@ -28,5 +28,23 @@ export class CardComponent implements OnInit{
     if(!this.user) throw new Error('User property is required');
   }
 
+  onDeleteUser(){
+    this.deleteUser().then(()=>{
+      this.usersService.usuarios = this.usersService.usuarios.filter((element) => element.id_usuario !== this.user.id_usuario);
+      console.log(this.usersService.usuarios)
+
+    })
+  }
+
+  async deleteUser() {
+    const RESP = await this.usersService.deleteUsuario(this.user!).toPromise();
+
+    if (RESP.ok) {
+      this.snackBar.open("User deleted", CLOSE, { duration: 5000 });
+    } else {
+      this.snackBar.open("Cant delete this user", CLOSE, { duration: 5000 });
+    }
+  }
+
 
 }

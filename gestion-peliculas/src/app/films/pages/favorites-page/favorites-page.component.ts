@@ -10,18 +10,22 @@ import { FavoritesService } from '../../services/favorites.service';
 })
 export class FavoritesPageComponent implements OnInit{
 
-  favorites: number[] = [];
-
-  constructor(private favoriteService: FavoritesService){}
+  constructor(private favoritesService: FavoritesService){}
 
   ngOnInit(): void {
     this.getFavorites()
   }
 
   async getFavorites(){
-    const RESPONSE = await this.favoriteService.getFavorites(localStorage.getItem('token')!).toPromise();
+    const RESPONSE = await this.favoritesService.getFavorites(localStorage.getItem('token')!).toPromise();
     if(RESPONSE.ok){
-      this.favorites = RESPONSE.data
+      this.favoritesService.favorites = RESPONSE.data
     }
   }
+
+  get favorites(){
+    return this.favoritesService.favorites
+  }
+
+
 }

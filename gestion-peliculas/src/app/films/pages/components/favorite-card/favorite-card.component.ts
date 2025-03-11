@@ -18,11 +18,9 @@ export class FavoriteCardComponent implements OnInit{
 
   public film: SpecificFilm | undefined;
 
-  public isLoading: boolean = true; // Controlador para manejar el estado de carga
-
   constructor(
               private filmService: FilmsService,
-              private favoriteService: FavoritesService,
+              private favoritesService: FavoritesService,
               public snackBar: MatSnackBar,
 
             ){}
@@ -31,7 +29,6 @@ export class FavoriteCardComponent implements OnInit{
     this.filmService.buscarPeliculaPorID(this.favorite)
     .subscribe(
       film => {this.film = film;
-      this.isLoading = false; // Cambiar a false cuando la película esté cargada
       })
   }
 
@@ -40,10 +37,15 @@ export class FavoriteCardComponent implements OnInit{
   }
 
   async onDelete(){
-    const RESPONSE = await this.favoriteService.deleteFavorite(this.film!.id, localStorage.getItem('token')!).toPromise();
-    if (RESPONSE.ok) {
-      this.snackBar.open(RESPONSE.message ?? "Favorite deleted successfully", CLOSE, { duration: 5000 });
-    } else { this.snackBar.open(RESPONSE.message ?? "Cant delete Favorite", CLOSE, { duration: 5000 }); }
+    let correct = await this.favoritesService.onDeleteFavorite(this.film!.id)
+    if (correct) {
+      this.snackBar.open("Favorite deleted successfully", CLOSE, { duration: 5000 });
+    } else { this.snackBar.open("Cant delete Favorite", CLOSE, { duration: 5000 }); }
+
+  }
+
+  deleteFavorites(){
+    this.onDelete()
   }
 
 }

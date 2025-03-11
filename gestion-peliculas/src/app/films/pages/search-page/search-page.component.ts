@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
 import { Film,} from 'src/app/interfaces/film.interfaces';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-search-page',
@@ -15,12 +16,20 @@ export class SearchPageComponent {
   //si no se pone la exclamación da error. la exclamación indica a angular que va a tener un valor si o si, por eso no hay que inicializarla
 
   public inicio = true;
-  constructor(private filmsService: FilmsService){
-
-  }
+  constructor(private filmsService: FilmsService,
+              private favoritesService: FavoritesService,
+  ){}
 
   ngOnInit(): void {
     this.filmsService.getGenreList(); // Se realiza la búsqueda de los géneros para tenerlos ya cargados en el servicio y después poder mpostrar los géneros de cada film. Se carga en el ngOnInit para que asi se cargue una sola vez
+    this.getFavorites()
+  }
+
+  async getFavorites(){
+    const RESPONSE = await this.favoritesService.getFavorites(localStorage.getItem('token')!).toPromise();
+    if(RESPONSE.ok){
+      this.favoritesService.favorites = RESPONSE.data
+    }
   }
 
   buscarPelicula():void{

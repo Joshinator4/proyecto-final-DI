@@ -6,8 +6,8 @@
    <mat-card-content class="mt-2">
     <h4>Rol: <span style="color: chartreuse;">{{user.rol}}</span></h4>
     <p>User ID: {{user.id_usuario}}</p>
-    <p *ngIf="user.observaciones != null ">Observations:
-      {{user.observaciones}}...
+    <p *ngIf="user.observaciones != null && user.observaciones != ''">Observations:
+      {{user.observaciones}}
     </p>
     <br>
   </mat-card-content>
@@ -17,6 +17,11 @@
     <button mat-button mat-raised color="accent" [routerLink]="['/users/edit', user.id_usuario]" style="font-size: 17px;">
       <mat-icon>edit</mat-icon>
       Edit User
+    </button>
+    <span class="spacer"></span>
+    <button mat-button mat-raised color="warn" (click)="onDeleteUser()" style="font-size: 17px;">
+      <mat-icon>delete</mat-icon>
+      Delete User
     </button>
   </mat-card-actions>
 

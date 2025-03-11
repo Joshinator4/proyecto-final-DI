@@ -50,13 +50,13 @@
           <mat-icon>arrow_back</mat-icon>
           <span>Back to search page</span>
         </button>
-        <button mat-fab extended (click)="addFavorite()" color="accent">
+        <button mat-fab extended *ngIf="!isFavorite" (click)="addFavoriteFilm()" color="accent">
           <mat-icon>favorite</mat-icon>
           <span>Add to Favorites</span>
         </button>
-        <button *ngIf="false" mat-fab extended (click)="volverAlListado()" color="warn">
-          <mat-icon>favorite</mat-icon>
-          <span>Add to Favorites</span>
+        <button mat-fab extended *ngIf="isFavorite" (click)="deleteFavorites()" color="warn">
+          <mat-icon>delete</mat-icon>
+          <span>Delete Favorite</span>
         </button>
       </div>
     </mat-card-content>

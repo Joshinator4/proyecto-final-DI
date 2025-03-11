@@ -11,10 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ListUserComponent implements OnInit{
 
-  users: Usuario[] = [];
-
   constructor(
-    private servicioUsuarios: UsersService,
+    private usersService: UsersService,
     private router: Router,
     ) { }
   ngOnInit() {
@@ -22,13 +20,15 @@ export class ListUserComponent implements OnInit{
   }
 
   async getUsuarios() {
-    const RESPONSE = await this.servicioUsuarios.getAllUsuarios().toPromise();
+    const RESPONSE = await this.usersService.getAllUsuarios().toPromise();
     if (RESPONSE.ok) {
-      this.users = RESPONSE.data
-      this.servicioUsuarios.usuarios = RESPONSE.data
+      this.usersService.usuarios = RESPONSE.data
     }
   }
 
+  get users(){
+    return this.usersService.usuarios
+  }
 
   onClick(){
     this.router.navigate(['/users/new-user'])
